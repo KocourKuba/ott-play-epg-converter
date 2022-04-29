@@ -6,7 +6,7 @@ import (
   "bytes"
   "database/sql"
   "github.com/rs/zerolog/log"
-  "ott-play-epg-converter/lib/string-hashes"
+//  "ott-play-epg-converter/lib/string-hashes"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 func SyncFile(prname string, chname string, rec_count uint32, f *bytes.Buffer) {
   if rec_count > 0  {
     f.WriteString("\n]}");
-    err := os.WriteFile(fmt.Sprintf("%s%d.json", prname, string_hashes.HashSting32(chname)), f.Bytes(), 0644)
+    err := os.WriteFile(fmt.Sprintf("%s%s.json", prname, chname), f.Bytes(), 0644)
     if err != nil { log.Err(err).Send() }
   }
   f.Reset()
